@@ -1,0 +1,43 @@
+ls
+# control.vhd
+# display.vhd
+# modelsim.ini
+# sim.do
+# tb_digit.vhd
+# tb.vhd
+# transcript
+# vsim.wlf
+# wave.do
+# work
+do sim.do
+# Model Technology ModelSim - Intel FPGA Edition vmap 2020.1 Lib Mapping Utility 2020.02 Feb 28 2020
+# vmap work work 
+# Modifying modelsim.ini
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 08:26:51 on Apr 04,2025
+# vcom -reportprogress 300 -work work display.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity display
+# -- Compiling architecture display of display
+# End time: 08:26:51 on Apr 04,2025, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 08:26:51 on Apr 04,2025
+# vcom -reportprogress 300 -work work control.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity control
+# -- Compiling architecture controlx of control
+# -- Loading entity display
+# ** Error (suppressible): control.vhd(42): (vcom-1339) Case statement choices cover only 8 out of 6561 cases.
+# ** Note: control.vhd(64): VHDL Compiler exiting
+# End time: 08:26:51 on Apr 04,2025, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# ** Error: /home/lucas/intelFPGA/20.1/modelsim_ase/linuxaloem/vcom failed.
+# Error in macro ./sim.do line 6
+# /home/lucas/intelFPGA/20.1/modelsim_ase/linuxaloem/vcom failed.
+#     while executing
+# "vcom -work work control.vhd"
