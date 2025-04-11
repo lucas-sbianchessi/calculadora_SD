@@ -11,7 +11,7 @@ entity control is port(
 end control;
 
 architecture controlx of control is 
-  signal data : std_logic_vector(31 downto 0); -- 8 x 4 = 32
+  signal data : std_logic_vector(31 downto 0) := (others => '0'); -- 8 x 4 = 32
 begin
 
 
@@ -56,6 +56,8 @@ begin
           data(27 downto 24) <= digit;
         when b"0111" =>
           data(31 downto 28) <= digit;
+        when others => 
+          data(31 downto 0) <= (others => '0');
       end case;
 
 		end if;

@@ -1,7 +1,11 @@
 onerror {resume}
 quietly WaveActivateNextPane {} 0
+add wave -noupdate /tb/DUT/position
+add wave -noupdate /tb/DUT/digit
+add wave -noupdate /tb/DUT/clock
+add wave -noupdate /tb/DUT/reset
 add wave -noupdate /tb/DUT/data
-add wave -noupdate /tb/DUT/segments
+add wave -noupdate /tb/DUT/count
 add wave -noupdate -color {Orange Red} /tb/DUT/EA
 add wave -noupdate -color {Orange Red} /tb/DUT/PE
 add wave -noupdate -color {Orange Red} -radix unsigned -radixshowbase 0 /tb/DUT/cont
