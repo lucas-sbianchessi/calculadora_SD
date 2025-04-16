@@ -7,13 +7,13 @@ use IEEE.std_logic_1164.all;
 -----------------------------------------
 -- Entidade
 -----------------------------------------
-entity tb_digit is 
+entity tb_display is 
 end entity;
 
 -----------------------------------------
 -- Arquitetura
 -----------------------------------------
-architecture tb_digit of tb_digit is
+architecture tb_display of tb_display is
   signal data     : std_logic_vector(3 downto 0) := "0000";
   signal segments : std_logic_vector(7 downto 0);
 begin
@@ -27,4 +27,4 @@ begin
   DUT: entity work.display
         port map(data => data, segments => segments); 
  
-end architecture tb_digit;
+end architecture tb_display;
