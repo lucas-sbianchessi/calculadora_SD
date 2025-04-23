@@ -97,5 +97,22 @@ module calculadora (
         endcase
     end
 
+    // status e data de saída
+    always_comb begin
+        data = 4'd0;
+        case (state)
+            IDLE, IN_A, OP, IN_B: begin
+                status = 2'd0; // idle
+                data   = cmd;  // mostra dígito ou operação
+            end
+            COMPUTE: status = 2'd1; // busy
+            DONE:    begin
+                status = 2'd0;
+                // output LSB digit of resultado (top pode extrair outros)
+                data = acc % 10;
+            end
+            ERROR:   status = 2'd2;
+        endcase
+    end
     
 endmodule
