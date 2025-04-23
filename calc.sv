@@ -30,8 +30,57 @@ module calculadora (
     logic [3:0] nA, nB;
     logic       inB;
 
-    // saída de posição fixa: top fará scroll, aqui posição sempre 0
+    // saída
     assign position = 3'd0;
+
+    // FSM sequencial
+    always_ff @(posedge clock or posedge reset) begin
+        if (reset) begin
+            state  <= IDLE;
+            op_a   <= 0; nA <= 0;
+            op_b   <= 0; nB <= 0;
+            inB    <= 0;
+            acc    <= 0;
+            mul_cnt<= 0;
+        end else begin
+            state <= next;
+            case (state)
+                IDLE: if (cmd <= DIG_MAX) begin
+                          op_a <= cmd;
+                          nA   <= 1;
+                      end
+                IN_A: if (cmd <= DIG_MAX) begin
+                          if (nA < 8) begin
+                              op_a <= op_a*10 + cmd;
+                              nA <= nA+1;
+                          end else next <= ERROR;
+                      end else if (cmd==CMD_PLUS||cmd==CMD_MINUS||cmd==CMD_MUL) begin
+                          op_sel <= cmd;
+                      end
+                OP: if (cmd <= DIG_MAX) begin
+                        inB <= 1;
+                        op_b <= cmd;
+                        nB   <= 1;
+                    end
+                IN_B: if (cmd <= DIG_MAX) begin
+                          if (nB < 8) begin
+                              op_b <= op_b*10 + cmd;
+                              nB <= nB+1;
+                          end else next <= ERROR;
+                      end else if (cmd==CMD_RES) begin
+                          if (op_sel==CMD_PLUS)  acc <= op_a+op_b;
+                          else if (op_sel==CMD_MINUS) acc <= (op_a>=op_b?op_a-op_b:32'hFFFFFFFF);
+                          else begin acc<=0; mul_cnt<=op_b; end
+                      end
+                COMPUTE: if (mul_cnt>0) begin
+                             acc<=acc+op_a;
+                             mul_cnt<=mul_cnt-1;
+                          end
+                DONE: ;
+                ERROR: ;
+            endcase
+        end
+    end
 
     
 endmodule
