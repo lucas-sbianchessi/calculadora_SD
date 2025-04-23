@@ -82,5 +82,20 @@ module calculadora (
         end
     end
 
+    // Next-state logic
+    always_comb begin
+        next = state;
+        case (state)
+            IDLE:   if (nA)     next = IN_A;
+            IN_A:   if (op_sel) next = OP;
+            OP:     if (inB)    next = IN_B;
+            IN_B:   if (cmd==CMD_RES)
+                        next = (op_sel==CMD_MUL?COMPUTE:DONE);
+            COMPUTE:if (mul_cnt==0) next = DONE;
+            DONE:   if (cmd==CMD_CLR) next=IDLE;
+            ERROR:  if (cmd==CMD_CLR) next=IDLE;
+        endcase
+    end
+
     
 endmodule
