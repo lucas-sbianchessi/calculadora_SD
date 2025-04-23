@@ -3,9 +3,9 @@ module calculadora (
     input logic clock,
     input logic reset,
     
-    output logic [2] status,
-    output logic [4] data,
-    output logic [4] position
+    output logic [1] status,
+    output logic [3] data,
+    output logic [3] position
 );
     
 endmodule
