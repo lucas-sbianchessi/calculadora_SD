@@ -1,16 +1,29 @@
-if {[file isdirectory work]} { vdel -all -lib work }
+# sim.do
+
+# Criar 'work'.
 vlib work
 vmap work work
 
-vcom -work work display.vhd
-vcom -work work control.vhd
-vcom -work work tb.vhd
 
-vsim -voptargs=+acc=lprn -t ns work.tb
+# Compilar os arquivos VHDL.
+vcom -2008 display.vhd
+vcom -2008 control.vhd
 
-set StdArithNoWarnings 1
-set StdVitalGlitchNoWarnings 1
 
-do wave.do 
+# Compilar os arquivos Verilog.
+vlog calculadora.sv
+vlog calculadora_top.sv
+vlog calculadora_top_tb.sv
 
-run 4 us
+
+# Iniciar a simulacao.
+vsim work.calculadora_top_tb
+
+
+# Wave
+add wave /dut_top/*
+
+# Rodar
+run 0
+
+# Fim do script sim.do
